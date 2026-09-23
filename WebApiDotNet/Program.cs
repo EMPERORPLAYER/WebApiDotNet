@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApiDotNet.Data;
 using WebApiDotNet.Data.Entities;
+using WebApiDotNet.Interfaces;
+using WebApiDotNet.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,8 @@ builder.Services.AddIdentity<UserEntity, RoleEntity>(options =>
 .AddEntityFrameworkStores<MyDatabaseContext>()
 .AddDefaultTokenProviders();
 
+
+builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 
